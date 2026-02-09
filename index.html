@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Leo Stoller – Remote Automation Engineer (Beckhoff TwinCAT). SPS-Programmierung, Systemintegration, Troubleshooting, Hydraulik-Integration. Remote weltweit, gelegentlich vor Ort nach Absprache." />
+  <meta name="theme-color" content="#0b1220" />
+
+  <title>Leo Stoller | Remote Automation Engineer (Beckhoff TwinCAT)</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#111a2e;
+      --panel2:#0f172a;
+      --text:#e8eefc;
+      --muted:#a9b6d8;
+      --brand:#33d6c6;
+      --brand2:#6aa8ff;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% -10%, rgba(51,214,198,.25), transparent 60%),
+        radial-gradient(900px 500px at 95% 0%, rgba(106,168,255,.18), transparent 55%),
+        radial-gradient(700px 500px at 60% 110%, rgba(106,168,255,.12), transparent 60%),
+        var(--bg);
+      line-height:1.5;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1100px; margin:0 auto; padding:24px}
+    .nav{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,18,32,.85), rgba(11,18,32,.55));
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 24px;
+      max-width:1100px; margin:0 auto;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(51,214,198,.9), rgba(106,168,255,.9));
+      color:#08101f; font-weight:900;
+      box-shadow: 0 8px 18px rgba(51,214,198,.18);
+    }
+    .nav-links{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .nav-links a{
+      padding:8px 10px; border-radius:12px; color:var(--muted);
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      border-color:var(--line);
+      background: rgba(255,255,255,.03);
+    }
+
+    .hero{padding:44px 0 18px}
+    .hero-grid{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(17,26,46,.82), rgba(15,23,42,.72));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:20px;
+    }
+    .badge-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:13px;
+      user-select:none;
+    }
+    .dot{width:8px; height:8px; border-radius:99px; background: var(--brand); box-shadow:0 0 0 4px rgba(51,214,198,.12)}
+    h1{margin:8px 0 10px; font-size:38px; line-height:1.15}
+    .sub{color:var(--muted); margin:0 0 18px; font-size:16px}
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color:var(--text);
+      font-weight:600;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(51,214,198,.35); background: rgba(51,214,198,.07)}
+    .btn.primary{
+      border-color: rgba(51,214,198,.55);
+      background: linear-gradient(135deg, rgba(51,214,198,.20), rgba(106,168,255,.12));
+    }
+    .btn.ghost:hover{border-color: rgba(106,168,255,.35); background: rgba(106,168,255,.08)}
+    .btn small{font-weight:500; color:var(--muted)}
+    .kpis{
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:14px;
+    }
+    .kpi{
+      padding:14px; border-radius:14px; border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .kpi strong{display:block; font-size:18px}
+    .kpi span{display:block; color:var(--muted); font-size:13px; margin-top:3px}
+
+    .right-card h2{margin:0 0 10px; font-size:18px}
+    .list{margin:0; padding:0; list-style:none}
+    .list li{
+      padding:10px 0; border-bottom:1px dashed rgba(255,255,255,.12);
+      color:var(--muted);
+    }
+    .list li:last-child{border-bottom:none}
+    .list b{color:var(--text); font-weight:600}
+
+    .section{padding:18px 0}
+    .section h2{margin:0 0 12px; font-size:22px}
+    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    @media (max-width: 920px){ .grid3{grid-template-columns:1fr} }
+
+    .service h3{margin:0 0 6px; font-size:16px}
+    .service p{margin:0; color:var(--muted); font-size:14px}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      font-size:13px; color:var(--muted);
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+
+    .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    @media (max-width: 920px){ .two-col{grid-template-columns:1fr} }
+
+    .project{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .project .meta{display:flex; gap:10px; flex-wrap:wrap}
+    .tag{
+      font-size:12px; color:var(--muted);
+      padding:6px 9px; border:1px solid var(--line);
+      border-radius:999px; background: rgba(255,255,255,.02);
+    }
+    .project h3{margin:0; font-size:16px}
+    .project p{margin:0; color:var(--muted); font-size:14px}
+
+    .contact-grid{
+      display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){ .contact-grid{grid-template-columns:1fr} }
+
+    label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color:var(--text);
+      outline:none;
+    }
+    textarea{min-height:110px; resize:vertical}
+    input:focus, textarea:focus{border-color: rgba(51,214,198,.45); box-shadow: 0 0 0 4px rgba(51,214,198,.10)}
+    .help{font-size:12px; color:var(--muted); margin-top:8px}
+
+    footer{
+      margin-top:26px; padding:18px 0 30px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footer-row{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .sep{opacity:.6; padding:0 6px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .small{font-size:12px}
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Start">
+        <div class="logo">LS</div>
+        <div>
+          <div>Leo Stoller</div>
+          <div class="small" style="color:var(--muted); margin-top:2px;">Remote Automation Engineer · Beckhoff TwinCAT</div>
+        </div>
+      </a>
+
+      <div class="nav-links" aria-label="Navigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#skills">Skills</a>
+        <a href="#projekte">Portfolio</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top" class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card">
+          <div class="badge-row">
+            <div class="badge"><span class="dot"></span> Verfügbar: Remote · weltweit</div>
+            <div class="badge">Beckhoff TwinCAT 2/3</div>
+            <div class="badge">Hydraulik + Elektrik</div>
+            <div class="badge">15+ Jahre Industrie</div>
+          </div>
+
+          <h1>Remote SPS-Programmierung & Systemintegration<br/>für industrielle Anlagen</h1>
+          <p class="sub">
+            Ich unterstütze OEMs, Integratoren und Betreiber bei <b>Beckhoff/TwinCAT-Projekten</b>:
+            Entwicklung & Optimierung von SPS-Software, Inbetriebnahme (remote/optional vor Ort),
+            <b>Troubleshooting</b> im laufenden Betrieb sowie <b>Hydraulik-Integration</b> in der Steuerungslogik.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#kontakt">Projekt anfragen</a>
+            <a class="btn ghost" href="#leistungen">Leistungen ansehen</a>
+            <a class="btn ghost" href="mailto:leo.stoller@bluewin.ch?subject=Projektanfrage%20-%20Remote%20Automation&body=Hallo%20Herr%20Stoller%2C%0D%0A%0D%0AKurzbeschreibung%20des%20Projekts%3A%0D%0A-%20Branche%2FAnlage%3A%0D%0A-%20TwinCAT%20Version%3A%0D%0A-%20Aufgabe%3A%0D%0A-%20Start%2FAuslastung%3A%0D%0A%0D%0AViele%20Gr%C3%BC%C3%9Fe">E-Mail senden <small>(leo.stoller@bluewin.ch)</small></a>
+          </div>
+
+          <div class="kpis" aria-label="Kennzahlen">
+            <div class="kpi">
+              <strong>Beckhoff Fokus</strong>
+              <span>TwinCAT 2/3 · ST (IEC 61131-3)</span>
+            </div>
+            <div class="kpi">
+              <strong>Remote first</strong>
+              <span>Support, Debugging, Inbetriebnahme</span>
+            </div>
+            <div class="kpi">
+              <strong>Mechatronik</strong>
+              <span>Hydraulik & elektrische Aktoren</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card right-card">
+          <h2>Typische Ergebnisse</h2>
+          <ul class="list">
+            <li><b>Störungen schneller beheben</b> durch strukturierte Analyse & Debugging</li>
+            <li><b>Stabilere Abläufe</b> durch Optimierung der Steuerungslogik</li>
+            <li><b>Sichere Integration</b> von Peripherie & Feldbussen (z. B. EtherCAT)</li>
+            <li><b>Retrofit & Erweiterungen</b> ohne „Big Bang“</li>
+            <li><b>Dokumentation</b> für Übergabe & Betrieb</li>
+          </ul>
+
+          <div style="margin-top:16px; border-top:1px solid var(--line); padding-top:14px;">
+            <h2>Rahmen</h2>
+            <ul class="list">
+              <li><b>Einsatz:</b> Remote, gelegentlich vor Ort nach Absprache</li>
+              <li><b>Sprachen:</b> Deutsch · Englisch</li>
+              <li><b>Kontakt:</b> <span class="mono">leo.stoller@bluewin.ch</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- LEISTUNGEN -->
+    <section id="leistungen" class="section">
+      <h2>Leistungen</h2>
+      <div class="grid3">
+        <div class="card service">
+          <h3>SPS-Programmierung (Beckhoff/TwinCAT)</h3>
+          <p>Neuentwicklung, Erweiterung und Refactoring von Steuerungssoftware (IEC 61131-3, v. a. ST) – sauber, testbar und wartbar.</p>
+          <div class="chips">
+            <span class="chip">TwinCAT 2/3</span><span class="chip">Structured Text</span><span class="chip">Modularisierung</span>
+          </div>
+        </div>
+
+        <div class="card service">
+          <h3>Troubleshooting & Debugging</h3>
+          <p>Schnelle Ursachenanalyse bei sporadischen Fehlern, Stillständen und instabilen Abläufen – remote oder vor Ort nach Absprache.</p>
+          <div class="chips">
+            <span class="chip">Fehleranalyse</span><span class="chip">Stabilisierung</span><span class="chip">Support im Betrieb</span>
+          </div>
+        </div>
+
+        <div class="card service">
+          <h3>Systemintegration & Feldbus</h3>
+          <p>Integration von Peripherie und Feldbussystemen (z. B. EtherCAT; weitere nach Projekt) inklusive sauberer Schnittstellen und Tests.</p>
+          <div class="chips">
+            <span class="chip">EtherCAT</span><span class="chip">I/O-Integration</span><span class="chip">Schnittstellen</span>
+          </div>
+        </div>
+
+        <div class="card service">
+          <h3>Inbetriebnahme (Remote / Vor Ort)</h3>
+          <p>Unterstützung bei Tests, Inbetriebnahme, Parametrierung und Abnahmen – mit Fokus auf Sicherheit, Stabilität und Dokumentation.</p>
+          <div class="chips">
+            <span class="chip">Remote Commissioning</span><span class="chip">Test & Abnahme</span><span class="chip">Doku</span>
+          </div>
+        </div>
+
+        <div class="card service">
+          <h3>Hydraulik in der Steuerungslogik</h3>
+          <p>Fundiertes Verständnis hydraulischer Systeme – Umsetzung von Sequenzen, Verriegelungen und Überwachungen in SPS-Software.</p>
+          <div class="chips">
+            <span class="chip">Hydraulik</span><span class="chip">Ablaufsteuerung</span><span class="chip">Verriegelungen</span>
+          </div>
+        </div>
+
+        <div class="card service">
+          <h3>Dokumentation & Übergabe</h3>
+          <p>Technische Dokumentationen, Funktionsbeschreibungen und Wissenstransfer für Teams und Anwender – verständlich und praxisnah.</p>
+          <div class="chips">
+            <span class="chip">Funktionsbeschreibung</span><span class="chip">Übergabe</span><span class="chip">Schulung</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <h2>Skills im Überblick</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3 style="margin:0 0 10px;">Technologie</h3>
+          <div class="chips">
+            <span class="chip">Beckhoff SPS</span>
+            <span class="chip">TwinCAT 2</span>
+            <span class="chip">TwinCAT 3</span>
+            <span class="chip">IEC 61131-3</span>
+            <span class="chip">Structured Text (ST)</span>
+            <span class="chip">FBD / SFC (nach Bedarf)</span>
+            <span class="chip">EtherCAT</span>
+            <span class="chip">HMI (TwinCAT/vergleichbar)</span>
+            <span class="chip">Systemintegration</span>
+            <span class="chip">Retrofit</span>
+          </div>
+          <p class="help">Hinweis: Weitere Feldbus-/Peripheriesysteme je nach Projekt möglich (z. B. Profibus/Profinet).</p>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 10px;">Arbeitsweise</h3>
+          <ul class="list">
+            <li><b>Strukturiert:</b> klare Module, saubere Schnittstellen, nachvollziehbare Logik</li>
+            <li><b>Praxisnah:</b> Maschinenverständnis inkl. Hydraulik & elektrischer Aktoren</li>
+            <li><b>Kommunikativ:</b> direkte Abstimmung mit Elektroplanung, Konstruktion, Produktion</li>
+            <li><b>Ergebnisorientiert:</b> Fokus auf Stabilität, Sicherheit und Betrieb</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="projekte" class="section">
+      <h2>Portfolio (Auszug)</h2>
+      <div class="two-col">
+        <div class="card project">
+          <div class="meta">
+            <span class="tag">Kraftwerksbereich</span>
+            <span class="tag">Schalt-/Bedienungsschrank</span>
+            <span class="tag">Beckhoff SPS</span>
+            <span class="tag">Hydraulik + Elektrik</span>
+          </div>
+          <h3>Schalt- und Bedienungsschrank – Kraftwerksanwendung</h3>
+          <p>
+            Aufbau und Integration eines Schalt- und Bedienungsschranks mit Beckhoff-SPS.
+            Umsetzung der Steuerungslogik zur Ansteuerung hydraulischer und elektrischer Komponenten
+            sowie Integration von Bedien- und Überwachungsfunktionen.
+          </p>
+          <a class="btn ghost" style="align-self:flex-start;" href="https://www.faeh-ag.ch/steuerungen" target="_blank" rel="noopener">Referenzseite öffnen</a>
+        </div>
+
+        <div class="card project">
+          <div class="meta">
+            <span class="tag">Remote Support</span>
+            <span class="tag">Troubleshooting</span>
+            <span class="tag">Optimierung</span>
+          </div>
+          <h3>SPS-Troubleshooting & Stabilisierung</h3>
+          <p>
+            Remote-Analyse von Störungen, Debugging und gezielte Optimierungen an Bestandsanlagen.
+            Fokus auf reproduzierbare Fehler, sichere Verriegelungen und stabile Abläufe im Dauerbetrieb.
+          </p>
+          <p class="help">Beispieltext – kann durch ein konkretes Projekt ersetzt werden.</p>
+        </div>
+
+        <div class="card project">
+          <div class="meta">
+            <span class="tag">Retrofit</span>
+            <span class="tag">Systemintegration</span>
+            <span class="tag">Dokumentation</span>
+          </div>
+          <h3>Retrofit & Erweiterungen</h3>
+          <p>
+            Erweiterung bestehender Steuerungssoftware, Integration zusätzlicher Peripherie
+            und Nachziehen technischer Dokumentation zur sauberen Übergabe an Betrieb/Service.
+          </p>
+          <p class="help">Beispieltext – kann durch ein konkretes Projekt ersetzt werden.</p>
+        </div>
+
+        <div class="card project">
+          <div class="meta">
+            <span class="tag">Hydraulik</span>
+            <span class="tag">Sequenzen</span>
+            <span class="tag">Safety / Monitoring</span>
+          </div>
+          <h3>Hydraulik-Integration in SPS-Logik</h3>
+          <p>
+            Abbildung hydraulischer Funktionen in der SPS: Sequenzen, Verriegelungen, Überwachungen,
+            Diagnose und Dokumentation – abgestimmt auf Mechanik und Prozessanforderungen.
+          </p>
+          <p class="help">Beispieltext – kann durch ein konkretes Projekt ersetzt werden.</p>
+        </div>
+      </div>
+      <p class="help">Tipp: Ersetze die „Beispieltext“-Karten später durch weitere echte Referenzen (ohne vertrauliche Details).</p>
+    </section>
+
+    <!-- ABLAUF -->
+    <section id="ablauf" class="section">
+      <h2>So läuft die Zusammenarbeit ab</h2>
+      <div class="grid3">
+        <div class="card">
+          <h3 style="margin:0 0 8px;">1) Kurz-Call & Ziel</h3>
+          <p class="sub" style="margin:0;">Wir klären Anlage, TwinCAT-Version, Ziel, Randbedingungen und Zugang (remote).</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px;">2) Analyse & Plan</h3>
+          <p class="sub" style="margin:0;">Ich liefere ein klares Vorgehen: Schritte, Risiken, Tests, grober Aufwand.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px;">3) Umsetzung & Übergabe</h3>
+          <p class="sub" style="margin:0;">Umsetzung, Tests, Dokumentation – plus Übergabe/Support für Betrieb und Team.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt" class="section">
+      <h2>Kontakt</h2>
+      <div class="contact-grid">
+        <div class="card">
+          <h3 style="margin:0 0 10px;">Projektanfrage</h3>
+          <p class="sub" style="margin:0 0 12px;">
+            Beschreibe kurz dein Vorhaben (Anlage, TwinCAT-Version, Ziel, Start, Auslastung).
+            Ich melde mich zeitnah mit Rückfragen und einem Vorschlag.
+          </p>
+
+          <!-- Mailto-Formular: funktioniert ohne Server -->
+          <form id="contactForm">
+            <label for="name">Name / Firma</label>
+            <input id="name" name="name" placeholder="z. B. Müller Maschinenbau GmbH" required />
+
+            <label for="email">E-Mail</label>
+            <input id="email" name="email" type="email" placeholder="name@firma.com" required />
+
+            <label for="topic">Thema</label>
+            <input id="topic" name="topic" placeholder="z. B. TwinCAT Debugging / Retrofit / Inbetriebnahme" />
+
+            <label for="msg">Nachricht</label>
+            <textarea id="msg" name="msg" placeholder="Kurzbeschreibung: Anlage, TwinCAT-Version, Problem/Ziel, Start, Auslastung, Remote-Zugang…" required></textarea>
+
+            <div class="cta-row" style="margin-top:12px;">
+              <button class="btn primary" type="submit">E-Mail vorbereiten</button>
+              <a class="btn ghost" href="mailto:leo.stoller@bluewin.ch">Direkt mailen</a>
+            </div>
+            <div class="help">Hinweis: Das Formular öffnet dein E-Mail-Programm (kein Upload/Tracking).</div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 10px;">Kontakt & Infos</h3>
+          <ul class="list">
+            <li><b>Name:</b> Leo Stoller</li>
+            <li><b>Rolle:</b> Remote Automation Engineer</li>
+            <li><b>Schwerpunkte:</b> Beckhoff TwinCAT · SPS · Troubleshooting · Hydraulik</li>
+            <li><b>Sprachen:</b> Deutsch · Englisch</li>
+            <li><b>E-Mail:</b> <span class="mono">leo.stoller@bluewin.ch</span></li>
+          </ul>
+
+          <div style="margin-top:14px; border-top:1px solid var(--line); padding-top:14px;">
+            <h3 style="margin:0 0 10px;">Preise (Richtwert)</h3>
+            <ul class="list">
+              <li><b>Stundensatz:</b> ab 100 CHF/h (min. 2 h)</li>
+              <li><b>Tagessatz:</b> ab 750 CHF/Tag</li>
+              <li><b>Remote:</b> Standard · <b>Dringend:</b> nach Absprache</li>
+            </ul>
+            <p class="help">Sätze abhängig von Umfang, Dringlichkeit und Rahmenbedingungen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-row">
+        <div>© <span id="year"></span> Leo Stoller · Remote Automation Engineer</div>
+        <div>
+          <a href="#top">Nach oben</a>
+          <span class="sep">·</span>
+          <a href="https://www.faeh-ag.ch/steuerungen" target="_blank" rel="noopener">Referenz</a>
+          <span class="sep">·</span>
+          <a href="mailto:leo.stoller@bluewin.ch">Kontakt</a>
+        </div>
+      </div>
+      <div class="small" style="margin-top:10px; opacity:.85;">
+        Hinweis: Diese Seite ist eine einfache, statische Website (kein Tracking). Für ein offizielles Impressum/Datenschutz bitte entsprechend ergänzen.
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact form -> mailto
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name  = encodeURIComponent(document.getElementById('name').value.trim());
+      const email = encodeURIComponent(document.getElementById('email').value.trim());
+      const topic = encodeURIComponent(document.getElementById('topic').value.trim());
+      const msg   = encodeURIComponent(document.getElementById('msg').value.trim());
+
+      const subject = `Projektanfrage – ${topic || 'Remote Automation (Beckhoff/TwinCAT)'}`;
+      const body =
+`Hallo Herr Stoller,
+
+Name/Firma: ${decodeURIComponent(name)}
+E-Mail: ${decodeURIComponent(email)}
+Thema: ${decodeURIComponent(topic)}
+
+Nachricht:
+${decodeURIComponent(msg)}
+
+Viele Grüße
+${decodeURIComponent(name)}`;
+
+      const mailto = `mailto:leo.stoller@bluewin.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    });
+  </script>
+</body>
+</html>
